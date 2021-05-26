@@ -2,7 +2,7 @@ from enum import IntFlag
 from fastapi.exceptions import HTTPException
 from starlette.status import HTTP_400_BAD_REQUEST
 from app.db.repositories.base import BaseRepository
-from app.models.cleaning import CleaningCreate, CleaningUpdate, CleaningInDB
+from app.schema_models.cleaning import CleaningCreate, CleaningUpdate, CleaningInDB
 from typing import List
 
 import logging

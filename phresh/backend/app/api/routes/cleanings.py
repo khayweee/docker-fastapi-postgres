@@ -5,7 +5,7 @@ from typing import List
 from fastapi import APIRouter, Body, Depends, HTTPException, Path
 from starlette.status import HTTP_201_CREATED, HTTP_404_NOT_FOUND
 
-from app.models.cleaning import CleaningCreate, CleaningPublic, CleaningInDB, CleaningUpdate
+from app.schema_models.cleaning import CleaningCreate, CleaningPublic, CleaningInDB, CleaningUpdate
 from app.db.repositories.cleanings import CleaningsRepository  
 from app.api.dependencies.database import get_repository  
 
@@ -35,7 +35,7 @@ async def get_cleaning_by_id(
     cleaning = await cleanings_repo.get_cleaning_by_id(id=id)
     if not cleaning:
         logger.warning("Unable to retrieve cleaning id=%s", id)
-        raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail="No cleaning found with id={id}.")
+        raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail=f"No cleaning found with id={id}.")
     return cleaning
 
 @router.post("/", response_model=CleaningPublic, name="cleanings:create-cleaning", status_code=HTTP_201_CREATED)
@@ -56,7 +56,7 @@ async def update_cleaning_by_id(
     updated_cleaning = await cleanings_repo.update_cleaning(id=id, cleaning_update=cleaning_update)
     
     if not updated_cleaning:
-        raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail="No cleaning found with id={id}")
+        raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail=f"No cleaning found with id={id}")
     return updated_cleaning
 
 @router.delete("/{id}/", response_model=int, name="cleanings:delete-cleaning-by-id")

@@ -11,7 +11,7 @@ from databases import Database
 import alembic
 from alembic.config import Config
 
-from app.models.cleaning import CleaningCreate, CleaningInDB
+from app.schema_models.cleaning import CleaningCreate, CleaningInDB
 from app.db.repositories.cleanings import CleaningsRepository
 
 

@@ -15,7 +15,7 @@ Public - attributes present on public facing
 from typing import Optional
 from enum import Enum
 
-from app.models.core import IDModelMixin, CoreModel
+from app.schema_models.core import IDModelMixin, CoreModel
 
 
 class CleaningType(str, Enum):
@@ -32,6 +32,9 @@ class CleaningBase(CoreModel):
     description: Optional[str]
     price: Optional[float]
     cleaning_type: Optional[CleaningType] = "spot_clean"
+
+    class Config:
+        orm_mode = True
 
 
 class CleaningCreate(CleaningBase):
